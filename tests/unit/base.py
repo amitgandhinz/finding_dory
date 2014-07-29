@@ -12,11 +12,17 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import os
+
+from tests import base
 
 
-tests_dir = os.path.abspath(os.path.dirname(__file__))
-os.environ.setdefault("CDN_TESTS_DIR", tests_dir)
+class TestCase(base.TestCase):
+    """Child class of tests.TestCase
 
-if "CDN_TESTS_CONFIGS_DIR" not in os.environ:
-    os.environ["CDN_TESTS_CONFIGS_DIR"] = os.path.join(tests_dir, "etc")
+    Inherit from this and write your test methods. If the child class defines
+    a prepare(self) method, this method will be called before executing each
+    test method.
+    """
+
+    def setUp(self):
+        super(TestCase, self).setUp()
